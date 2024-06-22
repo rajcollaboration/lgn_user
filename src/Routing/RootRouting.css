@@ -1,0 +1,27 @@
+/* RootRouting.css */
+.app-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100% - 80px);
+  /* justify-content: space-between; */
+  transition: all 0.5s;
+  overflow: hidden;
+  height: calc(var(--vh, 1vh)* 100);
+  flex-direction: column;
+}
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+  
+  .main-area {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .content {
+    flex-grow: 1;
+    overflow: auto; /* For scrollable content */
+  }
+  

@@ -95,7 +95,7 @@ const Login = ({ onLoginSuccess }) => { // Pass onLoginSuccess as a prop
             />
           </div>
           <p className='log-forgot-pss text-end'>
-            <a href="#">Forgot Password?</a>
+            <p>Forgot Password?</p>
           </p>
           <div className='login-fields'>
             <input className='submit_btn' type='submit' value='Login' />

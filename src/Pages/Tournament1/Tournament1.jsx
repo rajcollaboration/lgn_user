@@ -17,7 +17,7 @@ const Tournament1 = () => {
     const socketRef = useRef(null);
 
     useEffect(() => {
-        socketRef.current = io('http://localhost:8080', { query: { tournamentId: tournamentData._id } });
+        socketRef.current = io('https://lgn-backend-ypss.onrender.com', { query: { tournamentId: tournamentData._id } });
         
         // Event listener for new comments
         socketRef.current.on('newComment', (comment) => {

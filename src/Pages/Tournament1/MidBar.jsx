@@ -288,7 +288,7 @@ const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails }) => 
   </thead>
   <tbody>
     {
-      tournamentLeaderBoard?.map((leader,key)=>(
+     tournamentLeaderBoard?.length !== 0 ? tournamentLeaderBoard?.map((leader,key)=>(
       <tr key={key}>
       <th scope="row">{key+1}</th>
       <td>{leader.tournamentId.title}</td>
@@ -296,7 +296,7 @@ const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails }) => 
       <td ><span>{leader.correctPredictions ? "Correct" : "wrong"}</span></td>
       <td>{leader.totalTimeSpend}</td>
       </tr>
-      ))
+      )) : "No data found"
     }
   </tbody>
 </table>

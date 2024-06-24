@@ -108,9 +108,6 @@ const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails }) => 
     copy(url);
     alert('URL copied to clipboard!');
   };
-  console.log('====================================');
-  console.log(tournamentLeaderBoard);
-  console.log('====================================');
   return (
     <div className="stream_area order-sm-2">
       <div className="stream">

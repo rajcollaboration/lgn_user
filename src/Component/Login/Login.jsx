@@ -23,7 +23,6 @@ const Login = ({ onLoginSuccess }) => { // Pass onLoginSuccess as a prop
     (payload) => axios.post(log_api, payload),
     {
       onSuccess: (res) => {
-        console.log(res);
         if (res.data.status === "1") {
           alert(res.data.message);
           const { token , user} = res.data;

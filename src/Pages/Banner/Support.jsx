@@ -13,7 +13,6 @@ const Support = () => {
     // Handle form submission
     event.preventDefault();
     httpRequest("POST","api/support-tickit/create",supportDetails).then((res)=>{
-      console.log(res);
       alert("Ticket created successfully");
     })
   };

@@ -30,11 +30,9 @@ const Predictions = () => {
   }, [userId]);
 
   const getPrediction = () => {
-    console.log(userId, "userId");
     setIsloadingPrediction(true);
     httpRequest("GET", `api/tournament/prediction-list/${userId}`)
       .then((res) => {
-        console.log(res);
         setPrediction(res.result);
       })
       .catch((err) => {

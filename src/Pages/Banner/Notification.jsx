@@ -8,7 +8,6 @@ const Notification = () => {
     const getAllNotification = () => {
         httpRequest("GET", "/notification").then((response) => {
             setNotificationLoading(true);
-            console.log(response);
             setNotificationData(response.notifications);
         }).catch((error)=> {
             console.log(error);

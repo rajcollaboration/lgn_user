@@ -6,7 +6,7 @@ import { getlocalStorage, httpRequest } from '../../services/services';
 const Profile = () => {
   const [isProfileLoading, setIsProfileLoading] = useState(false);
   const [profileData, setProfileData] = useState({});
-
+  const [streamerRequestLoading, setStreamerRequestLoading] = useState(false);
   const getUserDetails = async() => {
     getlocalStorage("user_details").then((res)=>{
       const {token, user} = res;
@@ -15,7 +15,6 @@ const Profile = () => {
         "Authorization": "Bearer " + token
       };
     httpRequest("GET",`api/profile/user-profile/${user.others._id}`,{},header2).then((res) => {
-      console.log(res);
       setProfileData(res.userdetails);
     }).catch((error)=>{
       console.log(error);
@@ -31,12 +30,19 @@ const Profile = () => {
     localStorage.clear();
     window.location.reload();
   };
-
+const requestForStreamer = async () => {
+  setStreamerRequestLoading(true)
+ const res = await httpRequest("POST","api/auth/streamer-request",{userId:profileData?._id});
+ 
+ await getUserDetails();
+ setStreamerRequestLoading(false);
+}
   useEffect(()=>{
     getUserDetails();
+
   },[])
 
-
+console.log(profileData);
   return (
     <div className='main-content'>
       <Sidebar handleLogout={handleLogout} />
@@ -54,7 +60,9 @@ const Profile = () => {
                   <Link to={"/edit"}>Edit Profile</Link> | <Link to={"/"} onClick={handleLogout}>Logout</Link>
                 </figcaption>
               </div>
-              <div className="col-sm-6"></div>
+              <div className="col-sm-6">
+                <button className='btn btn-warning' disabled={profileData?.accountType === "pending"} onClick={requestForStreamer}>{streamerRequestLoading ? "Loading..." : "Request For Streamer"}</button>
+              </div>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ const Home = () => {
   }
     try {
       const results = await Promise.all([httpRequest("GET", "api/v1/banners",{}, header),httpRequest("GET", "api/tournament/all-tournaments",{},header2)]);
-      console.log('All functions completed', results);
+   
       setBanners(results[0].data);
       setTournaments(results[1].allTournaments)
     } catch (error) {

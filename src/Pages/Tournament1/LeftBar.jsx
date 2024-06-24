@@ -12,7 +12,6 @@ const LeftBar = () => {
   const getTournamentWiseLeaderBoardData = () => {
     setLeaderBoardLoading(true);
     httpRequest("POST","/tournament_wise_leaderboard", {tournament_id:id}).then((response) => {
-      console.log(response);
       setLeaderboard_data(response.leaderboard);
     }).catch((error)=>{
       console.log(error);

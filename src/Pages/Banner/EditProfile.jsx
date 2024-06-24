@@ -15,7 +15,6 @@ const [userId, setUserId] = useState("");
 const [token, setToken] = useState("");
   const updateProfile = (e) => {
     const {name,value} = e.target;
-    console.log(name,value);
     setProfileDetails(prevState => ({
       ...prevState,
       [name]: value
@@ -30,7 +29,6 @@ const [token, setToken] = useState("");
         "Authorization": "Bearer " + token
       };
     httpRequest("GET",`api/profile/user-profile/${user?.others?._id}`,{},header2).then((res) => {
-      console.log(res);
       setProfileDetails({
         name: res.userdetails.name,
         mobile: res.userdetails.mobile,
@@ -54,7 +52,6 @@ const [token, setToken] = useState("");
       alert("Please provide Name and Mobile");
       return;
     }
-    console.log(profileDetails);
     httpRequest("PUT","api/profile/edit-profile",{...profileDetails,userId,token}).then((res)=>{
       alert("Profile updated");
     }).catch((err)=>{

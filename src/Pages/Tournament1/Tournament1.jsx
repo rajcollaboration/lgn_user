@@ -17,7 +17,7 @@ const Tournament1 = () => {
     const socketRef = useRef(null);
 
     useEffect(() => {
-        socketRef.current = io('https://lgn-backend-ypss.onrender.com', { query: { tournamentId: tournamentData._id } });
+        socketRef.current = io('http://localhost:8080', { query: { tournamentId: tournamentData._id } });
         
         // Event listener for new comments
         socketRef.current.on('newComment', (comment) => {
@@ -27,7 +27,6 @@ const Tournament1 = () => {
         // Event listener for total users count
         socketRef.current.on('totalUsers', (count) => {
             setTotalUsers(count);
-            console.log(count);
         });
 
         return () => {
@@ -36,14 +35,12 @@ const Tournament1 = () => {
     }, [tournamentData._id]);
 const tournamentDetails = () =>{
   getlocalStorage('user_details').then((res)=>{
-    console.log(res.token);
     const {token} = res;
     const header2 = {
         "Authorization": "Bearer " + token
       }
 httpRequest("GET", `api/tournament/get-tournament-details/${id}`,{},header2)
 .then((res) => {
-  console.log(res);
   setTournamentData(res.tournament);
   setUserData(res.userdetails);
 })

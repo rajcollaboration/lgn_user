@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import io from 'socket.io-client';
 
-const RightBar = ({ tournamentData,userData,chat,setChat }) => {
+const RightBar = ({ tournamentData,userData,chat,setChat,activeRightSidebar }) => {
   // const [chat, setChat] = useState([]);
   const { id } = useParams();
   const [chatData, setChatData] = useState({
@@ -96,7 +96,7 @@ const RightBar = ({ tournamentData,userData,chat,setChat }) => {
   }, [id]);
 
   return (
-    <div className="right_sidebar order-sm-3 active">
+    <div className={`right_sidebar order-sm-3 ${activeRightSidebar ? "active": ""}`}>
       <div className="stream_info">
         <div className="stream_meta">
           <figure>

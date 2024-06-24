@@ -4,7 +4,7 @@ import { getlocalStorage, httpRequest } from "../../services/services";
 import { useParams } from "react-router-dom";
 import copy from 'copy-to-clipboard';
 
-const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails }) => {
+const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails,hideSidebar }) => {
   const [userId, setUserId] = useState("");
   const [questions, setQuestions] = useState([]);
   const { id } = useParams();
@@ -111,7 +111,7 @@ const MidBar = ({ tournamentData, userData, totalUsers, tournamentDetails }) => 
   return (
     <div className="stream_area order-sm-2">
       <div className="stream">
-        <a href="javascript:void(0)" className="chat_toggle">
+        <a href="javascript:void(0)" className="chat_toggle" onClick={hideSidebar}>
           <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.5834 5.20837L21.8751 12.5L14.5834 19.7917V13.5417H8.33342V11.4584H14.5834V5.20837ZM4.16675 19.7917V5.20837H6.25008V19.7917H4.16675Z" fill="white" />
           </svg>

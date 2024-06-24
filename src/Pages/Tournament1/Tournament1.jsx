@@ -9,7 +9,7 @@ const Tournament1 = () => {
   const [tournamentData, setTournamentData] = useState({});
   const [userData, setUserData] = useState({});
   const {id} = useParams();
-
+  const [activeRightSidebar, setactiveRightSidebar] = useState(false);
   // Start Socket for tournament
 
   const [chat, setChat] = useState([]);
@@ -17,7 +17,7 @@ const Tournament1 = () => {
     const socketRef = useRef(null);
 
     useEffect(() => {
-        socketRef.current = io('http://localhost:8080', { query: { tournamentId: tournamentData._id } });
+        socketRef.current = io('https://lgn-backend-ypss.onrender.com', { query: { tournamentId: tournamentData._id } });
         
         // Event listener for new comments
         socketRef.current.on('newComment', (comment) => {
@@ -53,11 +53,14 @@ httpRequest("GET", `api/tournament/get-tournament-details/${id}`,{},header2)
     tournamentDetails();
     
   },[]);
+  const hideSidebar = async() => {
+    setactiveRightSidebar(!activeRightSidebar);
+  }
     return (
         <content>
           <LeftBar />
-          <MidBar tournamentData={tournamentData} totalUsers={totalUsers} userData={userData} tournamentDetails={tournamentDetails}/>
-          <RightBar tournamentData={tournamentData} userData={userData} chat={chat}  setChat={setChat} />
+          <MidBar tournamentData={tournamentData} totalUsers={totalUsers} userData={userData} tournamentDetails={tournamentDetails} hideSidebar = {hideSidebar}/>
+          <RightBar tournamentData={tournamentData} userData={userData} chat={chat}  setChat={setChat} activeRightSidebar={activeRightSidebar} />
         </content>
       );
     };

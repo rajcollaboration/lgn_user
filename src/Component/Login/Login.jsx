@@ -13,6 +13,7 @@ const Login = ({ onLoginSuccess }) => { // Pass onLoginSuccess as a prop
     email: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -46,7 +47,7 @@ const Login = ({ onLoginSuccess }) => { // Pass onLoginSuccess as a prop
 
   const submitHandler = (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     // Email validation
     if (!inputState.email || !/\S+@\S+\.\S+/.test(inputState.email)) {
       alert('Please enter a valid email address.');
@@ -62,6 +63,7 @@ const Login = ({ onLoginSuccess }) => { // Pass onLoginSuccess as a prop
       userName: inputState.email,
       password: inputState.password,
     });
+    setIsLoading(false);
   };
 
   return (

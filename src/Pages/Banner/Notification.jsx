@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './SideBar';
-import { httpRequest } from '../../services/services';
+import { getlocalStorage, httpRequest } from '../../services/services';
 
 const Notification = () => {
     const [notificationLoading, setNotificationLoading] = useState(false);
     const [notificationData, setNotificationData] = useState([]);
+    const [JWTtoken, setToken] = useState("");
+    const [userId, setUserId] = useState("");
+
+    useEffect(() => {
+        const initialize = async () => {
+          await getUser();
+        };
+        initialize();
+      }, []);
+
+      const getUser = async () => {
+        try {
+          const res = await getlocalStorage("user_details");
+          const {token} = res;
+          setToken(token);
+          setUserId(res.user.others._id);
+        } catch (err) {
+          console.error("Error getting user details:", err);
+        }
+      };
     const getAllNotification = () => {
-        httpRequest("GET", "/notification").then((response) => {
+        const header2 = {
+            "Authorization": "Bearer " + JWTtoken
+          }
+        httpRequest("GET", `api/profile/notification/${userId}`,{},header2 ).then((response) => {
             setNotificationLoading(true);
-            setNotificationData(response.notifications);
+            setNotificationData(response.allNotificationByUserId);
         }).catch((error)=> {
             console.log(error);
         }).finally(()=> {
